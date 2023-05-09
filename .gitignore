@@ -1,0 +1,13 @@
+*.log
+.vs/
+.git/
+.github/
+*.cso
+Doxygen/
+Doxyfile
+build*/
+*.spv
+.vscode/
+*.cache
+imgui.ini
+*.dll
