@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.26.4)
 
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
     if(NOT DEFINED IN_SOURCE_BUILD)
@@ -88,9 +88,29 @@ add_definitions(-D_UNICODE)
 
 # ------------------------------------------------------------------------------------------------
 # Set C++ Version requirement
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_EXTENSIONS NO)
+
+# Value from https://github.com/Kitware/CMake/blob/master/Help/dev/experimental.rst#c20-module-apis
+# set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API "2182bf5c-ef0d-489a-91da-49dbc3090d2a")
+# set(CMAKE_EXPERIMENTAL_CXX_MODULE_DYNDEP 1)
+
+# ITC_TODO: We currently have to manually set 
+#	"Enable Experimental C++ Standard Library Modules"
+#	"Scan Sources For Module Dependencies"
+# settings to "yes" in Visual Studio settings! Fix this some time in the future
+# set(CMAKE_CXX_SCAN_FOR_MODULES YES)
+
+# string(CONCAT CMAKE_EXPERIMENTAL_CXX_SCANDEP_SOURCE
+#   "<CMAKE_CXX_COMPILER> <DEFINES> <INCLUDES> <FLAGS> <SOURCE>"
+#   " -MT <DYNDEP_FILE> -MD -MF <DEP_FILE>"
+#   " ${flags_to_scan_deps} -fdep-file=<DYNDEP_FILE> -fdep-output=<OBJECT>"
+#   )
+
+# set(CMAKE_EXPERIMENTAL_CXX_MODULE_MAP_FORMAT "msvc")
+# set(CMAKE_EXPERIMENTAL_CXX_MODULE_MAP_FLAG
+#   "${compiler_flags_for_module_map} -fmodule-mapper=<MODULE_MAP_FILE>")
 
 # ------------------------------------------------------------------------------------------------
 # Helper Functions
